@@ -1,4 +1,4 @@
-﻿import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
 import useCartStore from "../../store/cartStore";
 import { useState } from "react";
@@ -10,6 +10,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -24,61 +26,68 @@ export default function Header() {
   return (
     <>
       <div className="header">
-        <Link to="/" className="logo" style={{ border: "none", background: "none", cursor: "pointer" }}>
-          <img src="/assets/Img/Sweets1.png" alt="The Sweets" />
-        </Link>
+        <div className="logo-container">
+          <Link to="/" className="logo">
+            <img src="/assets/Img/Sweets1.png" alt="The Sweets" style={{ height: "180px", objectFit: "contain" }} />
+          </Link>
+        </div>
 
         <nav className="navigation">
-          <Link to="/">HOME</Link>
-          <Link to="/about">ABOUT</Link>
-          <Link to="/receipt">RECEIPT</Link>
+          <div className="nav-left">
+            <Link to="/">HOME</Link>
+            <Link to="/about">ABOUT</Link>
+            <Link to="/receipt">RECEIPT</Link>
+            <div className="cart-wrapper">
+              <button className="sp-cart" onClick={toggleCart}>
+                <ion-icon name="cart-outline"></ion-icon>
+              </button>
+              {totalItems() > 0 && <span className="cart-count">{totalItems()}</span>}
+            </div>
+          </div>
 
-          <button className="sp-cart" id="cart-btn" onClick={toggleCart}>
-            <ion-icon name="cart-outline"></ion-icon>
-          </button>
-          <span className="cart-count">{totalItems() > 0 ? totalItems() : ""}</span>
-
-          <form onSubmit={handleSearch} className="search-container">
-            <div className="input-wrapper">
-              <input
-                type="text"
-                className="search-input"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search for names.."
-              />
-              <span className="search-icon">
-                <button className="searchBtn" type="submit">
+          <div className="nav-center" style={{ visibility: isHome ? "visible" : "hidden", pointerEvents: isHome ? "auto" : "none" }}>
+            <form onSubmit={handleSearch} className="search-container">
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  className="search-input"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search for names.."
+                  disabled={!isHome}
+                />
+                <button className="searchBtn" type="submit" disabled={!isHome}>
                   <ion-icon name="search-outline"></ion-icon>
                 </button>
-              </span>
-            </div>
-          </form>
-
-          <Link to="/search" className="searchAdvance">ADVANCED SEARCH</Link>
-
-          <div className="auth-container">
-            {user ? (
-              <div className="user-menu">
-                <button id="user-btn" className="btnLogin-popup">{user.username}</button>
-                <button className="btnLogout-popup" onClick={handleLogout}>Logout</button>
               </div>
-            ) : (
-              <>
-                <button id="login-btn" className="btnLogin-popup" onClick={() => navigate("/login")}>Login</button>
-                <button id="register-btn" className="btnLogout-popup" onClick={() => navigate("/register")}>Register</button>
-              </>
-            )}
+            </form>
+          </div>
+
+          <div className="nav-right">
+            <Link to="/search" className="searchAdvance">ADVANCED SEARCH</Link>
+            <div className="auth-container">
+              {user ? (
+                <>
+                  <button className="btnLogin-popup" style={{border: 'none'}}>{user.username}</button>
+                  <button className="btnLogout-popup" onClick={handleLogout}>Logout</button>
+                </>
+              ) : (
+                <>
+                  <button className="btnLogin-popup" onClick={() => navigate("/login")}>Login</button>
+                  <button className="btnLogout-popup" onClick={() => navigate("/register")}>Register</button>
+                </>
+              )}
+            </div>
           </div>
         </nav>
-
-        <div className="hamburger" id="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           <div className="bar"></div><div className="bar"></div><div className="bar"></div>
         </div>
       </div>
 
       {menuOpen && (
-        <div className="mobile-menu" id="mobileMenu">
+        <div className="mobile-menu">
           <div className="hamburger" onClick={() => setMenuOpen(false)}>
             <div className="bar"></div><div className="bar"></div><div className="bar"></div>
           </div>

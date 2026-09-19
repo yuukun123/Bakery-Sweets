@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="Home_main">
-      <div className="banner" style={{ width: "100%", overflow: "hidden", position: "relative", height: "450px", marginTop: "30px" }}>
+      <div className="banner" style={{ width: "100%", overflow: "hidden", position: "relative", height: "450px" }}>
         {BANNERS.map((banner, idx) => (
           <img
             key={idx}

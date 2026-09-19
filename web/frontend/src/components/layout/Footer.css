@@ -1,1 +1,31 @@
 ﻿
+/* Căn hàng ngang và khoảng cách giữa các icon */
+.Footer_connect_icon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+/* Chỉnh kích thước và màu sắc mặc định của icon */
+.Footer_connect_icon a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    background-color: #f5d7d7;
+    color: #000000;
+    width: 30px;
+    height: 30px;
+    border-radius: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hiệu ứng khi rê chuột vào icon */
+.Footer_connect_icon li a ion-icon:hover {
+  color: #ffffff;
+  transform: scale(1.15);
+}
