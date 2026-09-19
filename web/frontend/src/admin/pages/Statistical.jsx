@@ -13,7 +13,7 @@ export default function Statistical() {
       <AdminHeader title="Báo cáo thống kê" />
       <div className="admin-page-container">
         
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
+        <div className="admin-grid-2" style={{ gap: "24px" }}>
           
           <div className="admin-card">
             <h3 style={{ margin: "0 0 16px", fontSize: "16px", fontWeight: "700", color: "#1e293b" }}>

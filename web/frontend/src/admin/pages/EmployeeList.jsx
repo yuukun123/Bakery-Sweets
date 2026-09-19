@@ -83,7 +83,7 @@ export default function EmployeeList() {
       <div className="admin-page-container">
         
         {/* Quick Stats Banner */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px", marginBottom: "20px" }}>
+        <div className="admin-grid-3" style={{ marginBottom: "20px" }}>
           <div className="admin-card" style={{ padding: "16px 20px", margin: 0, display: "flex", alignItems: "center", gap: "14px" }}>
             <div style={{ width: "42px", height: "42px", borderRadius: "10px", background: "#e0f2fe", color: "#0284c7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px" }}>
               <ion-icon name="people-outline"></ion-icon>
@@ -121,7 +121,7 @@ export default function EmployeeList() {
 
         {/* Action & Filter Bar */}
         <div className="admin-card" style={{ marginBottom: "20px", padding: "16px 20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px" }}>
+          <div className="admin-toolbar" style={{ margin: 0 }}>
             
             <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap", flex: 1 }}>
               <input
@@ -164,7 +164,7 @@ export default function EmployeeList() {
 
         {/* Employee Table */}
         <div className="admin-card">
-          <div style={{ overflowX: "auto" }}>
+          <div className="admin-table-responsive">
             <table className="admin-table">
               <thead>
                 <tr>

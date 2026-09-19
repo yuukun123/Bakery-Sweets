@@ -49,7 +49,7 @@ export default function EmployeeForm() {
       <AdminHeader title={isEdit ? "Chỉnh sửa hồ sơ nhân viên" : "Tạo hồ sơ nhân sự mới"} />
       <div className="admin-page-container">
         
-        <div className="admin-card" style={{ maxWidth: "850px", margin: "0 auto" }}>
+        <div className="admin-card" style={{ maxWidth: "960px", margin: "0 auto" }}>
           
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", borderBottom: "1px solid #e2e8f0", paddingBottom: "14px" }}>
             <div>
@@ -66,7 +66,7 @@ export default function EmployeeForm() {
           </div>
 
           {/* Navigation Tabs */}
-          <div style={{ display: "flex", gap: "10px", marginBottom: "25px", borderBottom: "1px solid #f1f5f9", paddingBottom: "10px" }}>
+          <div style={{ display: "flex", gap: "10px", marginBottom: "25px", borderBottom: "1px solid #f1f5f9", paddingBottom: "10px", flexWrap: "wrap" }}>
             <button
               type="button"
               onClick={() => setActiveTab("profile")}
@@ -116,7 +116,7 @@ export default function EmployeeForm() {
             {activeTab === "profile" && (
               <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
                 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
+                <div className="admin-grid-3" style={{ gap: "16px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Mã nhân viên *</label>
                     <input
@@ -151,7 +151,7 @@ export default function EmployeeForm() {
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div className="admin-grid-2" style={{ gap: "16px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Số điện thoại *</label>
                     <input
@@ -176,7 +176,7 @@ export default function EmployeeForm() {
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div className="admin-grid-2" style={{ gap: "16px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Giới tính</label>
                     <select
@@ -200,7 +200,7 @@ export default function EmployeeForm() {
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div className="admin-grid-2" style={{ gap: "16px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Phòng ban *</label>
                     <select
@@ -228,7 +228,7 @@ export default function EmployeeForm() {
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
+                <div className="admin-grid-3" style={{ gap: "16px" }}>
                   <div>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Ngày vào làm *</label>
                     <input
@@ -300,7 +300,7 @@ export default function EmployeeForm() {
 
                 {(formData.create_account || isEdit) && (
                   <>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                    <div className="admin-grid-2" style={{ gap: "16px" }}>
                       <div>
                         <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>Tên đăng nhập (user_name) *</label>
                         <input
@@ -325,7 +325,7 @@ export default function EmployeeForm() {
                       </div>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                    <div className="admin-grid-2" style={{ gap: "16px" }}>
                       <div>
                         <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>
                           {isEdit ? "Đổi mật khẩu mới (để trống nếu không đổi)" : "Mật khẩu ban đầu *"}

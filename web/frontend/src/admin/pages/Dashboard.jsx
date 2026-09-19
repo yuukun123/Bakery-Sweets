@@ -23,7 +23,7 @@ export default function Dashboard() {
       <div className="admin-page-container">
         
         {/* Stat Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "20px", marginBottom: "25px" }}>
+        <div className="admin-grid-4" style={{ marginBottom: "25px" }}>
           {stats.map((s, idx) => (
             <div key={idx} className="admin-card" style={{ padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", margin: 0 }}>
               <div>
@@ -50,7 +50,7 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          <div style={{ overflowX: "auto" }}>
+          <div className="admin-table-responsive">
             <table className="admin-table">
               <thead>
                 <tr>

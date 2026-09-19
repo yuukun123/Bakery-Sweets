@@ -51,7 +51,7 @@ export default function UserList() {
       <div className="admin-page-container">
         
         <div className="admin-card" style={{ marginBottom: "20px", padding: "16px 20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px" }}>
+          <div className="admin-toolbar" style={{ margin: 0 }}>
             <div style={{ display: "flex", gap: "12px", alignItems: "center", flex: 1, minWidth: "260px" }}>
               <input
                 type="text"
@@ -82,7 +82,7 @@ export default function UserList() {
         </div>
 
         <div className="admin-card">
-          <div style={{ overflowX: "auto" }}>
+          <div className="admin-table-responsive">
             <table className="admin-table">
               <thead>
                 <tr>

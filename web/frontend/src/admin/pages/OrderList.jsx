@@ -16,7 +16,7 @@ export default function OrderList() {
       <div className="admin-page-container">
         
         <div className="admin-card">
-          <div style={{ overflowX: "auto" }}>
+          <div className="admin-table-responsive">
             <table className="admin-table">
               <thead>
                 <tr>

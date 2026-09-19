@@ -11,13 +11,14 @@
 
 .admin-login-box {
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   background: #ffffff;
   border-radius: 16px;
   padding: 40px 35px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
   box-sizing: border-box;
   animation: fadeInDown 0.4s ease-out;
+  transition: all 0.3s ease;
 }
 
 @keyframes fadeInDown {
@@ -36,12 +37,13 @@
   margin-bottom: 25px;
 }
 
-/* LOGO: Tăng kích thước logo to rõ ràng, đẹp mắt */
+/* LOGO: Tăng kích thước logo to rõ ràng, đẹp mắt (95px trên Desktop) */
 .admin-login-logo {
   height: 95px;
   object-fit: contain;
   margin-bottom: 12px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+  transition: height 0.3s ease;
 }
 
 .admin-login-header h2 {
@@ -156,6 +158,8 @@
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .admin-remember-me {
@@ -232,4 +236,93 @@
 
 .back-to-store:hover {
   color: #1a2639;
+}
+
+/* ==========================================================================
+   RESPONSIVE: ƯU TIÊN ĐIỆN THOẠI (MOBILE) & IPAD, DESKTOP TỰ KÉO RA
+   ========================================================================== */
+
+/* 1. MÀN HÌNH ĐIỆN THOẠI (MOBILE: <= 767px) */
+@media (max-width: 767px) {
+  .admin-login-wrapper {
+    padding: 14px;
+    align-items: center;
+  }
+
+  .admin-login-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 26px 18px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-login-logo {
+    height: 72px;
+    margin-bottom: 8px;
+  }
+
+  .admin-login-header h2 {
+    font-size: 20px;
+  }
+
+  .admin-login-header p {
+    font-size: 12px;
+  }
+
+  .admin-login-form {
+    gap: 15px;
+  }
+
+  .admin-input-group input {
+    padding: 12px 38px 12px 38px;
+    font-size: 15px; /* Giúp không bị auto-zoom trên iOS Safari */
+  }
+
+  .admin-input-group > ion-icon {
+    left: 12px;
+    font-size: 17px;
+  }
+
+  .admin-password-toggle {
+    right: 10px;
+  }
+
+  .admin-login-submit {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .admin-demo-hint {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+}
+
+/* 2. MÀN HÌNH IPAD / TABLET (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .admin-login-wrapper {
+    padding: 30px;
+  }
+
+  .admin-login-box {
+    max-width: 440px;
+    padding: 36px 30px;
+  }
+
+  .admin-login-logo {
+    height: 85px;
+  }
+}
+
+/* 3. MÀN HÌNH DESKTOP (>= 1025px) - Rộng rãi, căn giữa chuẩn đẹp */
+@media (min-width: 1025px) {
+  .admin-login-box {
+    max-width: 460px;
+    padding: 42px 36px;
+  }
+
+  .admin-login-logo {
+    height: 95px;
+  }
 }

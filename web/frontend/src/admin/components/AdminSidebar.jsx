@@ -1,12 +1,15 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
+import useAdminUIStore from "../../store/adminUIStore";
 import "./AdminSidebar.css";
 
 export default function AdminSidebar() {
   const { logout } = useAuthStore();
+  const { sidebarOpen, closeSidebar } = useAdminUIStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    closeSidebar();
     logout();
     navigate("/admin/login");
   };
@@ -21,7 +24,12 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <aside className="admin-sidebar">
+    <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
+      {/* Nút đóng sidebar cho Mobile & Tablet */}
+      <button className="admin-sidebar-close" onClick={closeSidebar} aria-label="Đóng menu">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
       <div className="admin-sidebar-brand">
         <div className="brand-logo-wrap">
           <img src="/assets/Img/Sweets1.png" alt="The Sweets" className="admin-brand-img" />
@@ -35,6 +43,7 @@ export default function AdminSidebar() {
             key={item.to}
             to={item.to}
             end={item.end}
+            onClick={closeSidebar}
             className={({ isActive }) =>
               isActive ? "admin-nav-item active" : "admin-nav-item"
             }
@@ -46,7 +55,7 @@ export default function AdminSidebar() {
       </nav>
 
       <div className="admin-sidebar-footer">
-        <Link to="/" className="admin-footer-link" target="_blank" title="Xem cửa hàng khách hàng">
+        <Link to="/" className="admin-footer-link" target="_blank" title="Xem cửa hàng khách hàng" onClick={closeSidebar}>
           <ion-icon name="storefront-outline"></ion-icon>
           <span>Xem Website</span>
         </Link>

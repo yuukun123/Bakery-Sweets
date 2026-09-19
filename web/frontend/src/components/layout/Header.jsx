@@ -28,7 +28,7 @@ export default function Header() {
       <div className="header">
         <div className="logo-container">
           <Link to="/" className="logo">
-            <img src="/assets/Img/Sweets1.png" alt="The Sweets" style={{ height: "180px", objectFit: "contain" }} />
+            <img src="/assets/Img/Sweets1.png" alt="The Sweets" className="logo-img" />
           </Link>
         </div>
 

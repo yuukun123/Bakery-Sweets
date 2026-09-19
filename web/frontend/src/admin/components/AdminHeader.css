@@ -10,6 +10,42 @@
   top: 0;
   z-index: 50;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Nút Hamburger menu */
+.admin-menu-toggle {
+  display: none;
+  background: #ffffff;
+  border: 1.5px solid #1a2639;
+  color: #1a2639;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-menu-toggle:hover {
+  background-color: #cadbfb;
+  border-color: #8bb4f7;
+  transform: translateY(-1px);
+}
+
+.admin-header-title {
+  min-width: 0;
 }
 
 .admin-header-title h2 {
@@ -17,6 +53,9 @@
   font-weight: 700;
   color: #1e293b;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .admin-header-breadcrumb {
@@ -29,7 +68,8 @@
 .admin-header-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 .admin-status-badge {
@@ -42,6 +82,7 @@
   padding: 6px 12px;
   border-radius: 20px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .pulse-dot {
@@ -50,6 +91,7 @@
   background: #10b981;
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  flex-shrink: 0;
 }
 
 .admin-user-info {
@@ -62,7 +104,7 @@
 
 .admin-avatar {
   font-size: 36px;
-  color: #d4845a;
+  color: #1a2639;
   display: flex;
   align-items: center;
 }
@@ -76,9 +118,93 @@
   font-size: 14px;
   font-weight: 600;
   color: #1e293b;
+  white-space: nowrap;
 }
 
 .admin-role-tag {
   font-size: 11px;
   color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE: IPAD & ĐIỆN THOẠI (ƯU TIÊN MOBILE)
+   ========================================================================== */
+
+/* Tablet (iPad): 768px - 1024px */
+@media (max-width: 1024px) {
+  .admin-header {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .admin-menu-toggle {
+    display: inline-flex;
+  }
+
+  .admin-header-title h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile: Màn hình điện thoại <= 767px */
+@media (max-width: 767px) {
+  .admin-header {
+    height: 58px;
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .admin-menu-toggle {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .admin-header-left {
+    gap: 10px;
+  }
+
+  .admin-header-title h2 {
+    font-size: 0.95rem;
+    max-width: 160px;
+  }
+
+  .admin-header-breadcrumb {
+    display: none; /* Ẩn breadcrumb trên điện thoại để tiết kiệm không gian */
+  }
+
+  .admin-header-actions {
+    gap: 10px;
+  }
+
+  .admin-status-badge {
+    padding: 6px;
+    background: transparent;
+  }
+
+  .status-text {
+    display: none; /* Chỉ hiện chấm xanh trên điện thoại */
+  }
+
+  .admin-user-info {
+    padding-left: 8px;
+    gap: 6px;
+  }
+
+  .admin-avatar {
+    font-size: 30px;
+  }
+
+  .admin-user-details {
+    display: none; /* Ẩn tên chi tiết, giữ avatar nhỏ gọn trên điện thoại */
+  }
+}
+
+/* Desktop: Màn hình lớn > 1024px */
+@media (min-width: 1025px) {
+  .admin-menu-toggle {
+    display: none !important;
+  }
 }

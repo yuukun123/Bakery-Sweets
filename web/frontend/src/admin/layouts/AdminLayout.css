@@ -1,22 +1,43 @@
-
 .admin-wrapper {
   display: flex;
   min-height: 100vh;
   background-color: #f8fafc;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
 }
 
+/* Lớp phủ mờ nền khi mở sidebar trên Tablet & Mobile */
+.admin-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  animation: adminFadeIn 0.25s ease-out;
+}
+
+@keyframes adminFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* KHU VỰC NỘI DUNG CHÍNH (MAIN CONTENT) */
 .admin-main-content {
-  margin-left: 260px;
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 .admin-page-container {
   padding: 30px;
   flex: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Card & Container Styles */
@@ -27,6 +48,8 @@
   padding: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* 1. NÚT MẶC ĐỊNH / CHỨC NĂNG: Nền trắng, hover #cadbfb, KHÔNG DÙNG MÀU CAM */
@@ -41,10 +64,12 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   text-decoration: none;
   transition: all 0.2s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
 }
 
 .admin-btn-primary:hover, .admin-btn-default:hover {
@@ -67,10 +92,12 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   text-decoration: none;
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+  white-space: nowrap;
 }
 
 .admin-btn-accept:hover, .admin-btn-success:hover {
@@ -93,10 +120,12 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   text-decoration: none;
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25);
+  white-space: nowrap;
 }
 
 .admin-btn-cancel:hover, .admin-btn-danger:hover {
@@ -107,7 +136,7 @@
   box-shadow: 0 4px 10px rgba(239, 68, 68, 0.35);
 }
 
-/* 4. CHUYỂN TRANG NÚT SỐ (PAGINATION) - Đúng hệt như hình ảnh người dùng gửi */
+/* 4. CHUYỂN TRANG NÚT SỐ (PAGINATION) - Nút active hồng dâu #d25b88, inactive hồng phấn #ebd2e7 */
 .admin-pagination {
   display: flex;
   align-items: center;
@@ -116,6 +145,7 @@
   margin-top: 25px;
   padding-top: 18px;
   border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
 }
 
 .admin-page-btn {
@@ -130,7 +160,7 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: #ebd2e7; /* Màu hồng phấn nhạt cho nút chưa chọn */
+  background: #ebd2e7;
   color: #ffffff;
 }
 
@@ -140,7 +170,7 @@
 }
 
 .admin-page-btn.active {
-  background: #d25b88; /* Màu hồng dâu đậm cho trang hiện tại */
+  background: #d25b88;
   color: #ffffff;
   box-shadow: 0 3px 8px rgba(210, 91, 136, 0.35);
 }
@@ -172,11 +202,37 @@
   cursor: not-allowed;
 }
 
-/* Bảng Table Utility Styles */
+/* BẢNG DỮ LIỆU & WRAPPER CUỘN NGANG RESPONSIVE */
+.admin-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+.admin-table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+
+.admin-table-responsive::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.admin-table-responsive::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.admin-table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 600px; /* Đảm bảo bảng không bị co dúm trên điện thoại, tự động kích hoạt cuộn ngang */
 }
 
 .admin-table th {
@@ -186,6 +242,7 @@
   font-weight: 600;
   color: #475569;
   border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
 }
 
 .admin-table td {
@@ -206,6 +263,7 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .admin-status-pill.success {
@@ -221,4 +279,166 @@
 .admin-status-pill.danger {
   background: #fde8e8;
   color: #9b1c1c;
+}
+
+/* FILTER & ACTION TOOLBAR */
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-toolbar-left, .admin-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* RESPONSIVE GRID UTILITIES */
+.admin-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.admin-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.admin-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ==========================================================================
+   BREAKPOINTS: ƯU TIÊN ĐIỆN THOẠI (MOBILE), IPAD, DESKTOP TỰ KÉO RA
+   ========================================================================== */
+
+/* 1. MÀN HÌNH ĐIỆN THOẠI (MOBILE: <= 767px) - ƯU TIÊN HÀNG ĐẦU */
+@media (max-width: 767px) {
+  .admin-main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .admin-page-container {
+    padding: 14px 10px !important;
+  }
+
+  .admin-card {
+    padding: 16px 12px !important;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+
+  /* Grid chuyển hoàn toàn sang 1 cột trên điện thoại */
+  .admin-grid-4, .admin-grid-3, .admin-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Toolbar xếp dọc */
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .admin-toolbar-left, .admin-toolbar-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-toolbar-left input,
+  .admin-toolbar-left select,
+  .admin-toolbar-right button,
+  .admin-toolbar-right a {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Nút bấm chuyển sang xếp dọc hoặc full width nếu cần */
+  .admin-btn-stack-mobile {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .admin-btn-stack-mobile button,
+  .admin-btn-stack-mobile a {
+    width: 100% !important;
+  }
+
+  /* Phân trang thu gọn kích thước */
+  .admin-pagination {
+    gap: 6px;
+  }
+
+  .admin-page-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .admin-page-arrow {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+}
+
+/* 2. MÀN HÌNH IPAD / TABLET (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .admin-main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .admin-page-container {
+    padding: 20px 24px;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+
+  /* Trên iPad: 4 cột chuyển thành 2 cột cho thoáng */
+  .admin-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+
+  .admin-grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+}
+
+/* 3. MÀN HÌNH DESKTOP (>= 1025px) - TỰ ĐỘNG KÉO RA TOÀN BỘ CHIỀU RỘNG */
+@media (min-width: 1025px) {
+  .admin-main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .admin-page-container {
+    padding: 30px;
+    width: 100%;
+    max-width: 100%; /* Tự động kéo ra theo kích thước màn hình */
+  }
+
+  .admin-card {
+    width: 100%;
+    max-width: 100%; /* Tự kéo giãn toàn bộ trên desktop */
+  }
 }
