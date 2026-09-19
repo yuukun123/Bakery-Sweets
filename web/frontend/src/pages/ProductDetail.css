@@ -1,22 +1,271 @@
-﻿.product-detail-container { display:flex; gap:40px; padding:40px 100px; max-width:1200px; margin:0 auto; }
-.product-detail-img img { width:400px; height:400px; object-fit:cover; border-radius:12px; }
-.product-detail-info { flex:1; }
-.product-detail-info h1 { font-size:1.8rem; margin-bottom:8px; }
-.category { color:#888; margin-bottom:20px; }
-.size-selector h3 { margin-bottom:10px; }
-.size-options { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
-.size-btn { padding:10px 18px; border:2px solid #ddd; border-radius:8px; background:#fff; cursor:pointer; display:flex; flex-direction:column; gap:4px; transition:all 0.2s; }
-.size-btn.active { border-color:#d4845a; background:#fff5f0; }
-.size-btn span { font-size:0.8rem; color:#d4845a; }
-.product-price { font-size:1.6rem; font-weight:700; color:#d4845a; margin-bottom:20px; }
-.quantity-selector { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
-.quantity-selector button { width:36px; height:36px; border:1px solid #ddd; border-radius:50%; background:none; cursor:pointer; font-size:1.2rem; }
-.quantity-selector span { font-size:1.1rem; font-weight:600; }
-.add-to-cart-btn { padding:14px 32px; background:#d4845a; color:#fff; border:none; border-radius:10px; font-size:1rem; cursor:pointer; width:100%; margin-bottom:20px; }
-.add-to-cart-btn:hover { background:#b5623a; }
-.add-to-cart-btn:disabled { background:#ccc; cursor:not-allowed; }
-.product-meta p { margin-bottom:8px; color:#555; font-size:0.9rem; }
-@media (max-width:768px) {
-  .product-detail-container { flex-direction:column; padding:20px; }
-  .product-detail-img img { width:100%; height:300px; }
+.product-detail-page {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 30px 60px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.product-detail-container {
+  display: flex;
+  gap: 50px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* HÌNH ẢNH */
+.product-detail-img-box {
+  flex: 1;
+  max-width: 500px;
+}
+
+.product-detail-img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* THÔNG TIN */
+.product-detail-info-box {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-detail-breadcrumbs {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.product-detail-breadcrumbs a {
+  color: #1a2639;
+  text-decoration: none;
+}
+
+.product-detail-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 10px;
+}
+
+.product-detail-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #d4845a;
+  margin: 0 0 16px;
+}
+
+.product-detail-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0 0 24px;
+}
+
+.product-detail-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+/* SIZES */
+.product-detail-size-section {
+  margin-bottom: 22px;
+}
+
+.product-detail-size-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.product-size-btn {
+  padding: 10px 16px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.2s;
+}
+
+.product-size-btn:hover {
+  border-color: #d4845a;
+  background: #fdf5f0;
+}
+
+.product-size-btn.active {
+  border-color: #d4845a;
+  background: #fdf5f0;
+  color: #d4845a;
+  font-weight: 700;
+}
+
+.size-extra {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* QUANTITY */
+.product-detail-qty-section {
+  margin-bottom: 24px;
+}
+
+.product-detail-qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-detail-qty-control button {
+  width: 38px;
+  height: 38px;
+  background: #f8fafc;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.product-detail-qty-control button:hover {
+  background: #e2e8f0;
+}
+
+.product-detail-qty-control span {
+  width: 44px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* ADD BUTTON */
+.product-detail-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #d4845a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(212, 132, 90, 0.35);
+  transition: all 0.2s;
+  width: fit-content;
+  margin-bottom: 30px;
+}
+
+.product-detail-add-btn:hover {
+  background: #b5623a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(212, 132, 90, 0.45);
+}
+
+/* EXTRA INFO */
+.product-detail-extra-info {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVE: ƯU TIÊN ĐIỆN THOẠI (MOBILE), IPAD, DESKTOP TỰ KÉO RA
+   ========================================================================== */
+
+/* 1. MÀN HÌNH ĐIỆN THOẠI (<= 767px) - ƯU TIÊN HÀNG ĐẦU */
+@media (max-width: 767px) {
+  .product-detail-page {
+    padding: 16px 14px 40px;
+  }
+
+  .product-detail-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-detail-img-box {
+    max-width: 100%;
+  }
+
+  .product-detail-img {
+    height: 260px;
+    border-radius: 10px;
+  }
+
+  .product-detail-title {
+    font-size: 22px;
+  }
+
+  .product-detail-price {
+    font-size: 20px;
+  }
+
+  .product-detail-size-options {
+    gap: 8px;
+  }
+
+  .product-size-btn {
+    flex: 1;
+    min-width: 85px;
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .product-detail-add-btn {
+    width: 100%; /* Full width trên điện thoại */
+    padding: 13px;
+    font-size: 15px;
+  }
+}
+
+/* 2. MÀN HÌNH IPAD / TABLET (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .product-detail-page {
+    padding: 30px 24px;
+  }
+
+  .product-detail-container {
+    gap: 30px;
+  }
+
+  .product-detail-img-box {
+    max-width: 350px;
+  }
+
+  .product-detail-img {
+    height: 350px;
+  }
+}
+
+/* 3. MÀN HÌNH DESKTOP (>= 1025px) - TỰ ĐỘNG KÉO RA */
+@media (min-width: 1025px) {
+  .product-detail-container {
+    max-width: 1200px; /* Tự kéo giãn theo màn hình */
+  }
 }

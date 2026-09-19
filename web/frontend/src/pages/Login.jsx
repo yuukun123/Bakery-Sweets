@@ -44,9 +44,9 @@ export default function Login() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '80px 20px', backgroundColor: '#fff', minHeight: '70vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 16px', backgroundColor: '#fff', minHeight: '70vh' }}>
       <div style={{ width: '100%', maxWidth: '500px' }}>
-        <h1 style={{ textAlign: 'center', color: '#1a2639', marginBottom: '60px', fontSize: '36px', fontWeight: 'bold' }}>Login</h1>
+        <h1 style={{ textAlign: 'center', color: '#1a2639', marginBottom: '35px', fontSize: '36px', fontWeight: 'bold' }}>Login</h1>
         
         <form onSubmit={handleLogin}>
           

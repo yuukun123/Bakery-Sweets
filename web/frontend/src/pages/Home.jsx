@@ -1,15 +1,20 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 const CATEGORIES = ['ALL', 'MOUSSE', 'CROISSANT', 'DRINK'];
 const BANNERS = ['/assets/Img/banner1.jpg', '/assets/Img/banner2.jpg'];
 
 // Mock data
 const mockProducts = [
-  { id: 1, name: 'Chocolate Mousse', price: 12.99, image: 'p1.jpg', category: 'MOUSSE' },
-  { id: 2, name: 'Butter Croissant', price: 4.50, image: 'p2.jpg', category: 'CROISSANT' },
-  { id: 3, name: 'Strawberry Drink', price: 5.99, image: 'p3.jpg', category: 'DRINK' },
-  { id: 4, name: 'Matcha Cake', price: 15.00, image: 'p4.jpg', category: 'MOUSSE' }
+  { id: 1, name: 'Chocolate Mousse', price: 12.99, image: 'Mousse1.png', category: 'MOUSSE' },
+  { id: 2, name: 'Butter Croissant', price: 4.50, image: 'croissant1.png', category: 'CROISSANT' },
+  { id: 3, name: 'Strawberry Drink', price: 5.99, image: 'drink1.png', category: 'DRINK' },
+  { id: 4, name: 'Matcha Cake', price: 15.00, image: 'Mousse2.png', category: 'MOUSSE' },
+  { id: 5, name: 'Almond Croissant', price: 5.20, image: 'croissant2.png', category: 'CROISSANT' },
+  { id: 6, name: 'Peach Tea Drink', price: 4.80, image: 'drink2.png', category: 'DRINK' },
+  { id: 7, name: 'Mango Mousse', price: 13.50, image: 'Mousse3.png', category: 'MOUSSE' },
+  { id: 8, name: 'Chocolate Croissant', price: 5.50, image: 'croissant3.png', category: 'CROISSANT' },
 ];
 
 export default function Home() {
@@ -21,110 +26,91 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % BANNERS.length);
-    }, 3000); // Slide every 3 seconds
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
-  // Filter mock products
   const products = category === 'ALL' ? mockProducts : mockProducts.filter(p => p.category === category);
 
   return (
-    <div className="Home_main">
-      <div className="banner" style={{ width: "100%", overflow: "hidden", position: "relative", height: "450px" }}>
+    <div className="home-page-wrapper">
+      {/* BANNER SLIDER RESPONSIVE */}
+      <div className="home-banner-container">
         {BANNERS.map((banner, idx) => (
           <img
             key={idx}
             src={banner}
             alt={`Banner ${idx + 1}`}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              opacity: currentBanner === idx ? 1 : 0,
-              transition: 'opacity 1s ease-in-out',
-              display: 'block'
-            }}
+            className={`home-banner-img ${currentBanner === idx ? "active" : ""}`}
           />
         ))}
       </div>
 
-      <div className="pg-12" style={{ marginTop: '30px' }}>
-        <div className="container" style={{ padding: '0 105px' }}>
-          <div className="content">
-            <ul className="nav-links" style={{ display: 'flex', listStyle: 'none', padding: 0, gap: '20px', marginBottom: '30px' }}>
-              {CATEGORIES.map((cat, i) => (
-                <React.Fragment key={cat}>
-                  <li style={{ display: 'inline-flex', alignItems: 'center' }}>
-                    <label
-                      className={`nav-item ${category === cat ? "active" : ""}`}
-                      onClick={() => { setCategory(cat); setPage(1); }}
-                      style={{
-                        cursor: 'pointer',
-                        fontWeight: '600',
-                        color: category === cat ? '#d28f64' : '#000',
-                        fontSize: '16px'
-                      }}
-                    >
-                      {cat}
-                    </label>
-                  </li>
-                  {i < CATEGORIES.length - 1 && (
-                    <li style={{ display: 'inline-flex', alignItems: 'center', color: '#000', fontWeight: 'bold' }}>/</li>
-                  )}
-                </React.Fragment>
-              ))}
-            </ul>
-
-            {products.length === 0 ? (
-              <p>No products found!</p>
-            ) : (
-              <div className="product-grid" style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '20px'
-              }}>
-                {products.map(product => (
-                  <div key={product.id} className="product-card" style={{ border: '1px solid #eee', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
-                    <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <img src={`/assets/Img/${product.image || 'default.jpg'}`} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '5px' }} />
-                      <div className="info" style={{ marginTop: '10px' }}>
-                        <h3 style={{ fontSize: '18px', margin: '10px 0' }}>{product.name}</h3>
-                        <p className="price" style={{ color: '#d28f64', fontWeight: 'bold' }}>${product.price}</p>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {totalPages > 1 && (
-              <div className="pagination" style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '40px' }}>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+      {/* NỘI DUNG SẢN PHẨM */}
+      <div className="home-content-container">
+        {/* DANH MỤC CATEGORIES */}
+        <div className="home-categories-wrapper">
+          <ul className="home-category-nav">
+            {CATEGORIES.map((cat, i) => (
+              <React.Fragment key={cat}>
+                <li className="home-cat-item">
                   <button
-                    key={p}
-                    onClick={() => setPage(p)}
-                    style={{
-                      padding: '8px 15px',
-                      backgroundColor: page === p ? '#d28f64' : '#eee',
-                      color: page === p ? '#fff' : '#000',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      fontWeight: 'bold'
-                    }}
+                    type="button"
+                    className={`home-cat-btn ${category === cat ? "active" : ""}`}
+                    onClick={() => { setCategory(cat); setPage(1); }}
                   >
-                    {p}
+                    {cat}
                   </button>
-                ))}
-              </div>
-            )}
-          </div>
+                </li>
+                {i < CATEGORIES.length - 1 && (
+                  <span className="home-cat-divider">/</span>
+                )}
+              </React.Fragment>
+            ))}
+          </ul>
         </div>
+
+        {/* LƯỚI SẢN PHẨM RESPONSIVE (2 CỘT MOBILE, 3 CỘT IPAD, 4 CỘT DESKTOP) */}
+        {products.length === 0 ? (
+          <div className="home-no-products">Không tìm thấy sản phẩm nào!</div>
+        ) : (
+          <div className="home-product-grid">
+            {products.map(product => (
+              <div key={product.id} className="home-product-card">
+                <Link to={`/product/${product.id}`} className="home-product-link">
+                  <div className="home-product-img-wrap">
+                    <img 
+                      src={`/assets/Img/${product.image || 'Mousse1.png'}`} 
+                      alt={product.name} 
+                      className="home-product-img"
+                      onError={(e) => { e.target.src = '/assets/Img/Sweets1.png'; }}
+                    />
+                  </div>
+                  <div className="home-product-info">
+                    <h3 className="home-product-title">{product.name}</h3>
+                    <p className="home-product-price">${product.price.toFixed(2)}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* PHÂN TRANG */}
+        {totalPages > 1 && (
+          <div className="home-pagination">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+              <button
+                key={p}
+                onClick={() => setPage(p)}
+                className={`home-page-num ${page === p ? "active" : ""}`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-

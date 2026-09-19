@@ -1,31 +1,298 @@
-﻿
-/* Căn hàng ngang và khoảng cách giữa các icon */
-.Footer_connect_icon {
+.site-footer {
+  background-color: #212121; /* Nền xám đen đúng chuẩn như hình desktop người dùng gửi */
+  color: #ffffff;
+  padding: 50px 30px 25px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Poppins", sans-serif;
+  position: relative;
+}
+
+.footer-main-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* LƯỚI FOOTER */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-bottom: 35px;
+  align-items: start;
+}
+
+.footer-col {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+}
+
+/* TIÊU ĐỀ CỘT: CHỮ IN HOA MÀU TRẮNG ĐẬM */
+.footer-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* DANH SÁCH LIÊN KẾT */
+.footer-links {
   list-style: none;
   padding: 0;
-  margin-top: 15px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Chỉnh kích thước và màu sắc mặc định của icon */
-.Footer_connect_icon a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    background-color: #f5d7d7;
-    color: #000000;
-    width: 30px;
-    height: 30px;
-    border-radius: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.footer-links li a {
+  color: #9e9e9e;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
-/* Hiệu ứng khi rê chuột vào icon */
-.Footer_connect_icon li a ion-icon:hover {
+.footer-links li a:hover {
   color: #ffffff;
-  transform: scale(1.15);
+  transform: translateX(3px);
+}
+
+/* CỘT THƯƠNG HIỆU & ICON */
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* LOGO: TRÊN DESKTOP CHỈNH TO HƠN HẲN, RÕ NÉT VÀ NỔI BẬT */
+.footer-logo-img {
+  height: 120px;
+  max-width: 220px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  transition: all 0.3s ease;
+}
+
+/* 3 ICON MẠNG XÃ HỘI HÌNH VUÔNG BO TRÒN MÀU HỒNG NHẠT */
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-icon-btn {
+  width: 38px;
+  height: 38px;
+  background-color: #f5d7d7; /* Nền hồng phấn */
+  color: #1a1a1a !important; /* Icon đen đậm */
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 5px 14px rgba(245, 215, 215, 0.45);
+}
+
+/* ẨN THANH ĐƯỜNG KẺ / SCROLL TRACK TRONG FOOTER */
+.footer-divider-wrap,
+.footer-line {
+  display: none !important;
+}
+
+/* NÚT CUỘN TRÒN MÀU XANH XÁM SÁT BIÊN PHẢI MÀN HÌNH */
+.footer-scroll-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #5d6f8a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+  z-index: 9999;
+}
+
+.footer-scroll-top-btn:hover {
+  background-color: #7287a5;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* THÔNG TIN BẢN QUYỀN - CĂN GIỮA */
+.footer-bottom-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.footer-copyright {
+  font-size: 12.5px;
+  color: #888888;
+  margin: 0;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE: ƯU TIÊN ĐIỆN THOẠI (MOBILE), IPAD, DESKTOP
+   ========================================================================== */
+
+/* 1. MÀN HÌNH ĐIỆN THOẠI (<= 767px) - 2 CỘT */
+@media (max-width: 767px) {
+  .site-footer {
+    padding: 35px 20px 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+    margin-bottom: 25px;
+  }
+
+  .footer-title {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .footer-links li a {
+    font-size: 13.5px;
+  }
+
+  .footer-brand-col {
+    align-items: flex-start;
+  }
+
+  .footer-logo-wrap {
+    justify-content: flex-start;
+  }
+
+  .footer-logo-img {
+    height: 64px;
+    max-width: 140px;
+  }
+
+  .footer-social-icons {
+    justify-content: flex-start;
+  }
+
+  .social-icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .footer-scroll-top-btn {
+    right: 14px;
+    bottom: 20px;
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .footer-copyright {
+    font-size: 10.5px;
+  }
+}
+
+/* 2. MÀN HÌNH IPAD / TABLET (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .site-footer {
+    padding: 40px 25px 25px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .footer-title {
+    font-size: 16px;
+  }
+
+  .footer-links li a {
+    font-size: 14px;
+  }
+
+  .footer-logo-img {
+    height: 90px;
+    max-width: 170px;
+  }
+
+  .social-icon-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .footer-scroll-top-btn {
+    right: 18px;
+    bottom: 24px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* 3. MÀN HÌNH DESKTOP (>= 1025px) - LOGO TO NỔI BẬT */
+@media (min-width: 1025px) {
+  .footer-main-container {
+    max-width: 1240px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1.1fr 1.1fr 1.6fr;
+    gap: 45px;
+  }
+
+  .footer-logo-img {
+    height: 125px;
+    max-width: 230px;
+  }
+
+  .social-icon-btn {
+    width: 33px;
+    height: 33px;
+    font-size: 21px;
+  }
+
+  .footer-scroll-top-btn {
+    right: 28px;
+    bottom: 35px;
+    width: 44px;
+    height: 44px;
+  }
 }

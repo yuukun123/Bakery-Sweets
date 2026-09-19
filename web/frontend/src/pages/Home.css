@@ -1,1 +1,282 @@
-﻿
+.home-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BANNER */
+.home-banner-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 450px;
+  background: #1a1a2e;
+}
+
+.home-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.home-banner-img.active {
+  opacity: 1;
+}
+
+/* CONTENT CONTAINER */
+.home-content-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 35px 40px 60px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+/* CATEGORIES */
+.home-categories-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.home-category-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-cat-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a2639;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.home-cat-btn:hover {
+  color: #d4845a;
+  background: #fdf5f0;
+}
+
+.home-cat-btn.active {
+  color: #d4845a;
+  border-bottom: 2px solid #d4845a;
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.home-cat-divider {
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+/* PRODUCT GRID */
+.home-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  width: 100%;
+}
+
+.home-product-card {
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.home-product-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.home-product-img-wrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.home-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.home-product-card:hover .home-product-img {
+  transform: scale(1.05);
+}
+
+.home-product-info {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.home-product-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.home-product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #d4845a;
+  margin: 0;
+}
+
+.home-no-products {
+  text-align: center;
+  padding: 60px 20px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* PAGINATION */
+.home-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.home-page-num {
+  padding: 8px 16px;
+  background-color: #f1f5f9;
+  color: #1a2639;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.home-page-num.active {
+  background-color: #d4845a;
+  color: #fff;
+  border-color: #d4845a;
+}
+
+/* ==========================================================================
+   RESPONSIVE: ƯU TIÊN ĐIỆN THOẠI (MOBILE), IPAD, DESKTOP TỰ KÉO RA
+   ========================================================================== */
+
+/* 1. MÀN HÌNH ĐIỆN THOẠI (<= 767px) - ƯU TIÊN HÀNG ĐẦU */
+@media (max-width: 767px) {
+  .home-banner-container {
+    height: 220px; /* Chiều cao banner gọn trên điện thoại */
+  }
+
+  .home-content-container {
+    padding: 20px 14px 40px; /* Bỏ padding cứng 105px cũ */
+  }
+
+  .home-categories-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .home-category-nav {
+    gap: 8px;
+  }
+
+  .home-cat-btn {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  .home-cat-divider {
+    font-size: 12px;
+  }
+
+  /* Sản phẩm chia chuẩn 2 CỘT trên điện thoại, vừa vặn không tràn */
+  .home-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .home-product-img-wrap {
+    height: 140px;
+  }
+
+  .home-product-info {
+    padding: 10px 8px;
+    gap: 4px;
+  }
+
+  .home-product-title {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .home-product-price {
+    font-size: 14px;
+  }
+}
+
+/* 2. MÀN HÌNH IPAD / TABLET (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .home-banner-container {
+    height: 340px;
+  }
+
+  .home-content-container {
+    padding: 28px 24px 50px;
+  }
+
+  /* 3 CỘT sản phẩm trên iPad */
+  .home-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .home-product-img-wrap {
+    height: 190px;
+  }
+}
+
+/* 3. MÀN HÌNH DESKTOP (>= 1025px) - TỰ ĐỘNG KÉO RA */
+@media (min-width: 1025px) {
+  .home-content-container {
+    width: 100%;
+    max-width: 1280px; /* Tự kéo giãn theo màn hình */
+  }
+
+  .home-product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

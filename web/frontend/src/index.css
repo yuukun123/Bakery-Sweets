@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
+/* ẨN THANH CUỘN (SCROLLBAR) TOÀN BỘ TRANG WEB NHƯNG VẪN CUỘN MƯỢT */
+html, body {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE / Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Edge, Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
 
 body { width: 100%; min-height: 100vh; overflow-x: hidden; background-color: #ffffff; }
@@ -11,7 +26,7 @@ body { width: 100%; min-height: 100vh; overflow-x: hidden; background-color: #ff
 .slide-banner-img { width: 100%; height: 430px; object-fit: cover; }
 
 /* PRODUCTS GRID */
-.pg-12 { padding: 20px 80px; }
+.pg-12 { padding: 20px 0; width: 100%; }
 .nav-container .nav-links { display: flex; list-style: none; gap: 0; padding: 20px 0; flex-wrap: wrap; }
 .nav-item { padding: 6px 16px; cursor: pointer; font-weight: 500; transition: color 0.2s; }
 .nav-item.active, .nav-item:hover { color: #d4845a; border-bottom: 2px solid #d7845a; }
@@ -33,7 +48,7 @@ body { width: 100%; min-height: 100vh; overflow-x: hidden; background-color: #ff
 .page-link.active { background: #d4845a; color: #fff; border-color: #d4845a; }
 
 /* FOOTER */
-.footer { background: #1a1a2e; color: #fff; padding: 40px 100px 0; height:auto }
+.footer { background: #1a1a2e; color: #fff; height: auto; }
 .Footer_footer_contain { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; padding-bottom: 30px; }
 .Footer_footer_title { font-size: 1rem; margin-bottom: 12px; color: #d4845a; }
 .footer_section ul { list-style: none; }

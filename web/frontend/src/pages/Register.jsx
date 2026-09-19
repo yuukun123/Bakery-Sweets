@@ -1,3 +1,4 @@
+import './Auth.css';
 ﻿import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -62,7 +63,7 @@ export default function Register() {
         <h1 style={{ textAlign: 'center', color: '#1a2639', marginBottom: '50px', fontSize: '36px', fontWeight: 'bold' }}>Registration</h1>
         
         <form onSubmit={handleRegister}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 60px' }}>
+          <div className="register-grid">
             
             {/* Left Column */}
             <div>
