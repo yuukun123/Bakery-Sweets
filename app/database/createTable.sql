@@ -219,3 +219,21 @@ CREATE TABLE notifications (
     created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_name) REFERENCES users(user_name) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- ==============================================================================
+-- PHAN 6 (BO SUNG): LICH SU THAY DOI TRANG THAI DON HANG
+-- ==============================================================================
+
+-- 16. Bang order_status_logs: Lich su thay doi trang thai don hang
+--     Dung cho Web Admin: biet ai duyet luc may gio, ly do huy don la gi
+--     Tu dong INSERT moi khi orders.status thay doi (qua BE)
+CREATE TABLE order_status_logs (
+    log_id       INT PRIMARY KEY AUTO_INCREMENT,
+    order_id     INT NOT NULL,
+    employee_id  INT NULL,                                                    -- Nhan vien thuc hien (NULL = he thong / khach tu huy)
+    old_status   ENUM('Pending', 'Processing', 'Shipping', 'Completed', 'Cancelled') NULL,
+    new_status   ENUM('Pending', 'Processing', 'Shipping', 'Completed', 'Cancelled') NOT NULL,
+    note         TEXT,                                                        -- Ly do huy, ghi chu xu ly...
+    changed_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id)    REFERENCES orders(order_id)       ON DELETE CASCADE,
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
