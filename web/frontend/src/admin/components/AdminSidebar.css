@@ -1,0 +1,123 @@
+
+.admin-sidebar {
+  width: 260px;
+  background-color: #1a1a2e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.admin-sidebar-brand {
+  padding: 25px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-brand-img {
+  height: 55px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.admin-badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: #ffffff;
+  color: #1a1a2e;
+  padding: 3px 12px;
+  border-radius: 12px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.admin-nav-menu {
+  flex: 1;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  color: #a0aec0;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.admin-nav-item ion-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.admin-nav-item:hover {
+  background: rgba(202, 219, 251, 0.15);
+  color: #cadbfb;
+}
+
+.admin-nav-item.active {
+  background: #ffffff;
+  color: #1a1a2e;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+}
+
+.admin-nav-item.active ion-icon {
+  color: #1a1a2e;
+}
+
+.admin-sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-footer-link, .admin-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 13px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.admin-footer-link ion-icon, .admin-logout-btn ion-icon {
+  font-size: 18px;
+}
+
+.admin-footer-link:hover {
+  background: rgba(202, 219, 251, 0.15);
+  color: #cadbfb;
+}
+
+.admin-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}

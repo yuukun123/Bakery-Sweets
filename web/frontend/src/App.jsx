@@ -1,7 +1,5 @@
-﻿import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import CartDrawer from "./components/ui/CartDrawer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ClientLayout from "./components/layout/ClientLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,13 +9,25 @@ import Pay from "./pages/Pay";
 import About from "./pages/About";
 import Search from "./pages/Search";
 
+// Admin Imports
+import AdminLogin from "./admin/pages/AdminLogin";
+import AdminRoute from "./admin/components/AdminRoute";
+import AdminLayout from "./admin/layouts/AdminLayout";
+import Dashboard from "./admin/pages/Dashboard";
+import ProductList from "./admin/pages/ProductList";
+import ProductForm from "./admin/pages/ProductForm";
+import OrderList from "./admin/pages/OrderList";
+import UserList from "./admin/pages/UserList";
+import EmployeeList from "./admin/pages/EmployeeList";
+import EmployeeForm from "./admin/pages/EmployeeForm";
+import Statistical from "./admin/pages/Statistical";
+
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <CartDrawer />
-      <div className="Home_main">
-        <Routes>
+      <Routes>
+        {/* Nhóm trang Khách hàng (ClientLayout gồm Header & Footer của tiệm bánh) */}
+        <Route element={<ClientLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
@@ -26,9 +36,27 @@ function App() {
           <Route path="/receipt" element={<Receipt />} />
           <Route path="/pay" element={<Pay />} />
           <Route path="/search" element={<Search />} />
-        </Routes>
-      </div>
-      <Footer />
+        </Route>
+
+        {/* Trang Đăng nhập Quản trị */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* Nhóm trang Quản trị (Protected) */}
+        <Route path="/admin" element={<AdminRoute />}>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="products/add" element={<ProductForm />} />
+            <Route path="products/edit/:id" element={<ProductForm />} />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="employees" element={<EmployeeList />} />
+            <Route path="employees/add" element={<EmployeeForm />} />
+            <Route path="employees/edit/:id" element={<EmployeeForm />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="statistical" element={<Statistical />} />
+          </Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
