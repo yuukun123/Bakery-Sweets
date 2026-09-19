@@ -1,94 +1,81 @@
-﻿import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import BASE_URL from "../api/config";
-import useCartStore from "../store/cartStore";
-import "./ProductDetail.css";
+﻿import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import useCartStore from '../store/cartStore';
+
+const mockProduct = {
+  id: 1,
+  name: 'Chocolate Mousse',
+  price: 12.99,
+  image: 'p1.jpg',
+  description: 'Delicious chocolate mousse cake with a smooth texture.'
+};
+const mockSizes = [
+  { id: 1, size_name: 'Small', extra_price: 0 },
+  { id: 2, size_name: 'Medium', extra_price: 2.50 },
+  { id: 3, size_name: 'Large', extra_price: 5.00 },
+];
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [sizes, setSizes] = useState([]);
-  const [selectedSize, setSelectedSize] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const { addItem, toggleCart } = useCartStore();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const [prodRes, sizeRes] = await Promise.all([
-          axios.get(`${BASE_URL}/products/${id}`),
-          axios.get(`${BASE_URL}/products/${id}/sizes`),
-        ]);
-        setProduct(prodRes.data);
-        setSizes(sizeRes.data);
-        if (sizeRes.data.length > 0) setSelectedSize(sizeRes.data[0]);
-      } catch { navigate("/"); }
-      finally { setLoading(false); }
-    };
-    fetchProduct();
-  }, [id]);
+  const addToCart = useCartStore(state => state.addItem);
+  
+  const [product] = useState(mockProduct);
+  const [sizes] = useState(mockSizes);
+  const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
-    if (!selectedSize) return;
-    addItem(product, selectedSize, quantity);
-    toggleCart();
+    if (sizes.length > 0 && !selectedSize) {
+      alert('Please select a size');
+      return;
+    }
+    const sizeObj = sizes.find(s => s.id === parseInt(selectedSize));
+    const extra = sizeObj ? sizeObj.extra_price : 0;
+    
+    addToCart({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price + extra,
+      size: sizeObj ? sizeObj.size_name : '',
+      quantity
+    });
+    alert('Added to cart!');
   };
 
-  if (loading) return <p style={{textAlign:"center",padding:"40px"}}>Loading...</p>;
-  if (!product) return null;
+  if (!product) return <div>Loading...</div>;
 
   return (
-    <div className="product-detail-container">
-      <div className="product-detail-img">
-        <img src={product.image} alt={product.product_name} />
+    <div className="product-detail" style={{ padding: '50px 105px', display: 'flex', gap: '40px' }}>
+      <div className="product-image" style={{ flex: 1 }}>
+        <img src={`/assets/Img/${product.image}`} alt={product.name} style={{ width: '100%', borderRadius: '10px' }} />
       </div>
-      <div className="product-detail-info">
-        <h1>{product.product_name}</h1>
-        <p className="category">{product.category_name}</p>
-
-        <div className="size-selector">
-          <h3>Select Size:</h3>
-          <div className="size-options">
-            {sizes.map((s) => (
-              <button
-                key={s.size_id}
-                className={`size-btn ${selectedSize?.size_id === s.size_id ? "active" : ""}`}
-                onClick={() => setSelectedSize(s)}
-              >
-                {s.size_name}
-                <span>{Number(s.price).toLocaleString("vi-VN")} VND</span>
-              </button>
-            ))}
+      <div className="product-info" style={{ flex: 1 }}>
+        <h1>{product.name}</h1>
+        <p className="price" style={{ fontSize: '24px', color: '#d28f64', fontWeight: 'bold' }}>${product.price}</p>
+        <p>{product.description}</p>
+        
+        {sizes.length > 0 && (
+          <div className="sizes" style={{ margin: '20px 0' }}>
+            <label>Size:</label>
+            <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} style={{ marginLeft: '10px', padding: '5px' }}>
+              <option value="">Select size</option>
+              {sizes.map(s => (
+                <option key={s.id} value={s.id}>{s.size_name} (+${s.extra_price})</option>
+              ))}
+            </select>
           </div>
-        </div>
-
-        {selectedSize && (
-          <p className="product-price">{Number(selectedSize.price).toLocaleString("vi-VN")} VND</p>
         )}
 
-        <div className="quantity-selector">
-          <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-          <span>{quantity}</span>
-          <button onClick={() => setQuantity(quantity + 1)}>+</button>
+        <div className="quantity" style={{ margin: '20px 0' }}>
+          <label>Quantity:</label>
+          <input type="number" min="1" value={quantity} onChange={e => setQuantity(parseInt(e.target.value))} style={{ width: '60px', marginLeft: '10px', padding: '5px' }} />
         </div>
 
-        <button
-          className="add-to-cart-btn"
-          onClick={handleAddToCart}
-          disabled={!selectedSize || product.status !== "Available"}
-        >
-          {product.status === "Available" ? "Add to Cart" : product.status}
-        </button>
-
-        <div className="product-meta">
-          {product.ingredients && <p><strong>Ingredients:</strong> {product.ingredients}</p>}
-          {product.expiration_date && <p><strong>Expiry:</strong> {product.expiration_date}</p>}
-          {product.storage_instructions && <p><strong>Storage:</strong> {product.storage_instructions}</p>}
-        </div>
+        <button onClick={handleAddToCart} style={{ padding: '10px 30px', backgroundColor: '#d28f64', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '16px' }}>Add to Cart</button>
       </div>
     </div>
   );
 }
+

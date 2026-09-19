@@ -1,53 +1,35 @@
-﻿import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import BASE_URL from "../api/config";
-import useAuthStore from "../store/authStore";
-import "./Auth.css";
+﻿import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
 
 export default function Login() {
-  const [form, setForm] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { setUser } = useAuthStore();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const setAuth = useAuthStore(state => state.setAuth);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); setError("");
-    try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, form);
-      setUser(res.data.user, res.data.token);
-      navigate("/");
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Please try again.");
-    } finally { setLoading(false); }
+    if (email === 'admin@gmail.com' && password === '123') {
+      setAuth({ id: 1, role: 'admin', name: 'Admin User' }, 'mock-token');
+      navigate('/');
+    } else if (email && password) {
+      setAuth({ id: 2, role: 'user', name: 'Customer User' }, 'mock-token');
+      navigate('/');
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (
-    <div className="wrapper">
-      <div className="form-box login">
+    <div className="login-page" style={{ display: 'flex', justifyContent: 'center', padding: '50px 0' }}>
+      <form onSubmit={handleLogin} style={{ width: '300px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <h2>Login</h2>
-        {error && <p className="error-msg">{error}</p>}
-        <form id="loginForm" onSubmit={handleSubmit}>
-          <div className="input-box">
-            <span className="icon"><ion-icon name="person-outline"></ion-icon></span>
-            <input id="loginUserName" name="username" type="text" required
-              value={form.username} onChange={(e) => setForm({...form, username: e.target.value})} />
-            <label>User name</label>
-          </div>
-          <div className="input-box">
-            <span className="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-            <input id="loginPassword" name="password" type="password" required
-              value={form.password} onChange={(e) => setForm({...form, password: e.target.value})} />
-            <label>Password</label>
-          </div>
-          <button type="submit" className="btn" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
-          <div className="login-register">
-            <p>Don&apos;t have an account? <Link to="/register" className="register-link">Register</Link></p>
-          </div>
-        </form>
-      </div>
+        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required style={{ padding: '10px' }} />
+        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required style={{ padding: '10px' }} />
+        <button type="submit" style={{ padding: '10px', backgroundColor: '#d28f64', color: '#fff', border: 'none', cursor: 'pointer' }}>Login</button>
+      </form>
     </div>
   );
 }
+

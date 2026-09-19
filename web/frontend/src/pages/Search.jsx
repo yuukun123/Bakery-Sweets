@@ -1,58 +1,45 @@
-﻿import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
-import BASE_URL from "../api/config";
-import "./Search.css";
+﻿import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const mockProducts = [
+  { id: 1, name: 'Chocolate Mousse', price: 12.99, image: 'p1.jpg' }
+];
 
 export default function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ term: searchParams.get("term") || "", category: "all", minPrice: "", maxPrice: "" });
+  const [term, setTerm] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [results, setResults] = useState([]);
+  const [searched, setSearched] = useState(false);
 
-  useEffect(() => { if (form.term) handleSearch(); }, []);
-
-  const handleSearch = async (e) => {
-    if (e) e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await axios.get(`${BASE_URL}/products`, {
-        params: { term: form.term, category: form.category !== "all" ? form.category : undefined,
-          minPrice: form.minPrice || undefined, maxPrice: form.maxPrice || undefined, limit: 50 }
-      });
-      setProducts(res.data.data || []);
-    } catch { setProducts([]); } finally { setLoading(false); }
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearched(true);
+    setResults(mockProducts.filter(p => p.name.toLowerCase().includes(term.toLowerCase())));
   };
 
   return (
-    <div className="search-page">
-      <h1>Advanced Search</h1>
-      <form className="search-form" onSubmit={handleSearch}>
-        <div className="search-fields">
-          <input type="text" placeholder="Product name..." value={form.term} onChange={e => setForm({...form,term:e.target.value})} />
-          <select value={form.category} onChange={e => setForm({...form,category:e.target.value})}>
-            <option value="all">All Categories</option>
-            <option value="Mousse">Mousse</option>
-            <option value="Croissant">Croissant</option>
-            <option value="Drink">Drink</option>
-          </select>
-          <input type="number" placeholder="Min price" value={form.minPrice} onChange={e => setForm({...form,minPrice:e.target.value})} />
-          <input type="number" placeholder="Max price" value={form.maxPrice} onChange={e => setForm({...form,maxPrice:e.target.value})} />
-          <button type="submit">Search</button>
-        </div>
+    <div className="search-page" style={{ padding: '50px 105px' }}>
+      <h2>Advanced Search</h2>
+      <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px', marginBottom: '30px' }}>
+        <input type="text" placeholder="Product name..." value={term} onChange={e => setTerm(e.target.value)} style={{ padding: '10px' }} />
+        <input type="number" placeholder="Min price" value={minPrice} onChange={e => setMinPrice(e.target.value)} style={{ padding: '10px', width: '100px' }} />
+        <input type="number" placeholder="Max price" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} style={{ padding: '10px', width: '100px' }} />
+        <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#d28f64', color: '#fff', border: 'none', cursor: 'pointer' }}>Search</button>
       </form>
-      <div className="search-results">
-        {loading ? <p>Searching...</p> : products.length === 0 ? <p>No products found.</p> :
-          products.map(p => (
-            <div className="movie-item" key={p.product_id}>
-              <Link to={`/product/${p.product_id}`}>
-                <img className="poster-img" src={p.image} alt={p.product_name} width={300} height={300} />
-              </Link>
-              <p className="title">{p.product_name}</p>
-              <p className="text-color">{Number(p.min_price || p.price || 0).toLocaleString("vi-VN")} VND</p>
-            </div>
-          ))
-        }
+
+      {searched && results.length === 0 && <p>No products found.</p>}
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+        {results.map(product => (
+          <div key={product.id} style={{ border: '1px solid #eee', padding: '10px', textAlign: 'center' }}>
+            <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={`/assets/Img/${product.image}`} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+              <h3>{product.name}</h3>
+              <p>${product.price}</p>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

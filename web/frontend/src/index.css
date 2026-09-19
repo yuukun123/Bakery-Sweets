@@ -4,7 +4,7 @@
 
 body { width: 100%; min-height: 100vh; overflow-x: hidden; }
 #root { display: flex; flex-direction: column; min-height: 100vh; }
-.Home_main { flex: 1; }
+.Home_main { flex: 1; padding-bottom: 60px; }
 
 /* HEADER */
 .header { position: relative; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; display: grid; grid-template-columns: repeat(1, 1fr); justify-content: space-between; align-items: center; padding: 0 105px; height: 210px; transition: transform 0.3s ease-in-out; }
@@ -107,4 +107,5 @@ body { width: 100%; min-height: 100vh; overflow-x: hidden; }
   .movie-item { width: 160px; }
   .footer { padding: 30px 20px 0; }
 }
+
 
