@@ -1,0 +1,10 @@
+﻿.about-page {}
+.about-banner { position: relative; }
+.about-banner img { width: 100%; height: 400px; object-fit: cover; }
+.about-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.about-overlay h1 { font-size: 3rem; }
+.about-overlay p { font-size: 1.2rem; }
+.about-content { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+.about-section { margin-bottom: 40px; }
+.about-section h2 { font-size: 1.6rem; color: #d4845a; margin-bottom: 12px; }
+.about-section p { font-size: 1rem; line-height: 1.8; color: #555; }

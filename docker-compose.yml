@@ -1,12 +1,12 @@
-version: '3.8'
+﻿version: '3.8'
 
 # ==============================================================================
-# THE SWEETS — Docker Compose
-# Kiến trúc:
+# THE SWEETS â€” Docker Compose
+# Kiáº¿n trÃºc:
 #   Web:    React (FE: port 3000) + C# ASP.NET Core (BE: port 5000)
-#   Mobile: Flutter (FE - chạy trên thiết bị) + Python FastAPI (BE: port 8000)
+#   Mobile: Flutter (FE - cháº¡y trÃªn thiáº¿t bá»‹) + Python FastAPI (BE: port 8000)
 #   DB:     MySQL 8.0 (port 3308) + phpMyAdmin (port 8081)
-#   Legacy: PHP Web cũ (port 8080)
+#   Legacy: PHP Web cÅ© (port 8080)
 # ==============================================================================
 
 services:
@@ -36,7 +36,7 @@ services:
       retries: 5
 
   # ============================================================
-  # PHPMYADMIN — Quản lý DB trực quan
+  # PHPMYADMIN â€” Quáº£n lÃ½ DB trá»±c quan
   # ============================================================
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -54,7 +54,7 @@ services:
       - thesweets_network
 
   # ============================================================
-  # WEB — C# ASP.NET Core Backend (BE: port 5000)
+  # WEB â€” C# ASP.NET Core Backend (BE: port 5000)
   # ============================================================
   web_backend:
     build:
@@ -80,7 +80,7 @@ services:
       - thesweets_network
 
   # ============================================================
-  # WEB — React Frontend (FE: port 3000)
+  # WEB â€” React Frontend (FE: port 3000)
   # ============================================================
   web_frontend:
     build:
@@ -101,7 +101,7 @@ services:
       - thesweets_network
 
   # ============================================================
-  # MOBILE — Python FastAPI Backend (BE: port 8000)
+  # MOBILE â€” Python FastAPI Backend (BE: port 8000)
   # ============================================================
   mobile_backend:
     build:

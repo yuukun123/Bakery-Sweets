@@ -1,0 +1,8 @@
+﻿.search-page { padding: 40px 100px; }
+.search-page h1 { font-size: 2rem; margin-bottom: 20px; }
+.search-fields { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+.search-fields input, .search-fields select { padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; min-width: 180px; }
+.search-fields button { padding: 10px 24px; background: #d4845a; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+.search-fields button:hover { background: #b5623a; }
+.search-results { display: flex; flex-wrap: wrap; gap: 20px; }
+@media (max-width:768px) { .search-page { padding: 20px; } }

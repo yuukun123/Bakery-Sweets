@@ -1,0 +1,10 @@
+﻿.receipt { padding: 40px 100px; }
+.big-text h1 { font-size: 2rem; margin-bottom: 20px; }
+.text-infor, .custumer { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; }
+.text-top p { font-weight: 600; color: #555; }
+.choose { padding: 6px 14px; background: #d4845a; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+.choose:hover { background: #b5623a; }
+.more-infor-content { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 30px; border-radius: 12px; width: 500px; max-height: 80vh; overflow-y: auto; z-index: 1001; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+.more-infor-content h3 { margin-bottom: 10px; font-size: 1.3rem; }
+.blur-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; }
+@media (max-width:768px) { .receipt { padding: 20px; } .text-infor, .custumer { grid-template-columns: repeat(3,1fr); } .more-infor-content { width: 90%; } }
